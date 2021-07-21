@@ -5,7 +5,9 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc",
-    "start-db": ""
+    "start-db": "cd scripts && ./create-database.sh",
+    "create-recipe-table": "cd scripts && ./create-recipe-table.sh",
+    "start-and-load-db": "yarn run start-db && yarn run create-recipe-table"
   },
   "dependencies": {
     "next": "latest",
