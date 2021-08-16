@@ -13,7 +13,6 @@ CREATE TABLE pictures (
     id SERIAL PRIMARY KEY,
     author varchar(255),
     description varchar(255),
-    title varchar(255),
     picture_url varchar(255),
     recipe_id INT,
     CONSTRAINT fk_recipe FOREIGN KEY(recipe_id) REFERENCES recipes(id) -- picture should respond to one recipe
