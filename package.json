@@ -6,7 +6,7 @@
     "start": "next start",
     "type-check": "tsc",
     "start-db": "cd scripts && ./create-database.sh",
-    "create-recipe-table": "cd scripts && ./create-recipe-table.sh",
+    "create-recipe-table": "cd scripts && ./create-recipe-tables.sh",
     "start-and-load-db": "yarn run start-db && yarn run create-recipe-table"
   },
   "dependencies": {
