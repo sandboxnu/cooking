@@ -8,4 +8,4 @@ INSERT INTO pictures (author, description, picture_url, recipe_id) VALUES ('iman
 
 INSERT INTO pictures (author, description, picture_url, recipe_id) VALUES ('alex', 'i actually cooked something', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.landolakes.com%2Frecipe%2F18736%2Firish-soda-bread%2F&psig=AOvVaw0xCdGsI7E4xvCUtjDoQafj&ust=1629233289793000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMiHgY61tvICFQAAAAAdAAAAABAI', 2);
 
-INSERT INTO pictures (author, description, picture_url, recipe_id) VALUES ('max', 'i actually cooked something', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.tasteofhome.com%2Frecipes%2Fhomemade-irish-soda-bread%2F&psig=AOvVaw0xCdGsI7E4xvCUtjDoQafj&ust=1629233289793000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMiHgY61tvICFQAAAAAdAAAAABAN', 3);
+INSERT INTO pictures (author, description, picture_url, recipe_id) VALUES ('max', 'i actually cooked something', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.tasteofhome.com%2Frecipes%2Fhomemade-irish-soda-bread%2F&psig=AOvVaw0xCdGsI7E4xvCUtjDoQafj&ust=1629233289793000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMiHgY61tvICFQAAAAAdAAAAABAN', 2);
