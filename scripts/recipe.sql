@@ -5,6 +5,7 @@ CREATE TABLE recipes (
     id SERIAL PRIMARY KEY,
     author varchar(255),
     title varchar(255),
+    description varchar(255),
     ingredients varchar(1024),
     steps varchar(65535) -- longest possible
 );
