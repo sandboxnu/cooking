@@ -1,0 +1,1 @@
+INSERT INTO recipes ( author, title, ingredients, steps) VALUES ('deez', 'nuts', '1. deez \n2. nuts', '1. die' );
