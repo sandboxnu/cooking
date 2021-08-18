@@ -17,7 +17,7 @@ interface CardProps {
 
 const testData: Recipe[] = [
   {
-    id: "23",
+    id: 23,
     author: "nuts",
     ingredients: "",
     steps: "",
@@ -27,7 +27,7 @@ const testData: Recipe[] = [
     title: "deez",
   },
   {
-    id: "24",
+    id: 24,
     author: "nuts",
     ingredients: "",
     steps: "",
