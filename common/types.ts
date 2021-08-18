@@ -17,4 +17,5 @@ export type Recipe = {
   ingredients: string;
   steps: string;
   pictureIds: Array<string>;
+  title: string;
 };
