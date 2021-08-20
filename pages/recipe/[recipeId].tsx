@@ -7,6 +7,8 @@ import {
 import { useRouter } from 'next/dist/client/router';
 import { IRecipe, Picture } from '../../common/types';
 import styled from 'styled-components';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 // root: {
 //   display: 'flex',
@@ -58,13 +60,22 @@ const testRecipe: IRecipe = {
 export default function Recipe() {
   const router = useRouter();
   const { recipeId } = router.query;
+  const [spotlightPhoto, setSpotlightPhoto] = useState<Picture>(undefined);
 
   //TODO: get real recipe from recipeId
   const recipe = testRecipe;
 
+  /**
+   * Anticipating recipe being loaded from db query
+   */
+  useEffect(() => {
+    setSpotlightPhoto(recipe.pictures[0] ?? undefined);
+  }, [recipe]);
+
   return (
     <div>
       <div>
+        <img src={spotlightPhoto?.pictureUrl} />
         <StyledImageList cols={2.5}>
           {recipe.pictures.map((picture: Picture) => (
             <ImageListItem key={picture.pictureUrl}>
