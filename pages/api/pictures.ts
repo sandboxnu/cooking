@@ -3,6 +3,7 @@ import { connection } from "../../server/database";
 
 const handler: NextApiHandler = async (req, res) => {
   // posting and getting pictures
+  await connection.connect();
   if (req.method === "POST") {
     await postHandler(req, res);
   } else if (req.method === "GET") {
@@ -10,13 +11,11 @@ const handler: NextApiHandler = async (req, res) => {
   } else {
     res.status(404).send(undefined);
   }
+  await connection.clean();
 };
 
 const postHandler: NextApiHandler = async (req, res) => {
   // TODO: do some validation
-  
-  await connection.connect();
-  
   // get data from the body
   const { pictureUrl, author, description } = req.body;
 
@@ -39,13 +38,8 @@ const postHandler: NextApiHandler = async (req, res) => {
 }
 
 const getHandler: NextApiHandler = async (req, res) => {
-  await connection.connect();
-
-  const result = await connection.query(`SELECT * from recipes;`);
-  console.log(result);
-  // todo: implement this part
-  await connection.clean();
-  res.status(200).send(undefined);
+  const result = await connection.query(`SELECT * from pictures;`);
+  res.status(200).json({ pictures: result.rows });
 }
 
 export default handler;
