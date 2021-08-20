@@ -1,6 +1,38 @@
-import { ImageList } from '@material-ui/core';
+import {
+  IconButton,
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+} from '@material-ui/core';
 import { useRouter } from 'next/dist/client/router';
 import { IRecipe, Picture } from '../../common/types';
+import styled from 'styled-components';
+
+// root: {
+//   display: 'flex',
+//   flexWrap: 'wrap',
+//   justifyContent: 'space-around',
+//   overflow: 'hidden',
+//   backgroundColor: theme.palette.background.paper,
+// },
+// imageList: {
+//   flexWrap: 'nowrap',
+//   // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+//   transform: 'translateZ(0)',
+// },
+// title: {
+//   color: theme.palette.primary.light,
+// },
+// titleBar: {
+//   background:
+//     'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+// },
+
+const StyledImageList = styled.ImageList`
+    flexWrap: 'nowrap',
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: 'translateZ(0)',
+`;
 
 const testPicture: Picture = {
   id: 1,
@@ -32,7 +64,24 @@ export default function Recipe() {
 
   return (
     <div>
-      <ImageList />
+      <div>
+        <StyledImageList cols={2.5}>
+          {recipe.pictures.map((picture: Picture) => (
+            <ImageListItem key={picture.pictureUrl}>
+              <img src={picture.pictureUrl} alt={picture.description} />
+              <ImageListItemBar
+                title={picture.description}
+                classes={
+                  {
+                    // root: classes.titleBar,
+                    // title: classes.title,
+                  }
+                }
+              />
+            </ImageListItem>
+          ))}
+        </StyledImageList>
+      </div>
     </div>
   );
 }
