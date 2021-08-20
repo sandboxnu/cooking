@@ -1,6 +1,8 @@
+import { ImageList } from '@material-ui/core';
 import { useRouter } from 'next/dist/client/router';
+import { IRecipe, Picture } from '../../common/types';
 
-const testPicture = {
+const testPicture: Picture = {
   id: 1,
   author: 'deez nuts',
   description: 'great recipe!',
@@ -9,7 +11,7 @@ const testPicture = {
   recipeId: 1,
 };
 
-const testRecipe = {
+const testRecipe: IRecipe = {
   id: 1,
   author: 'Mr. Deez',
   ingredients: '1. deez \n 2.nuts',
@@ -26,5 +28,11 @@ export default function Recipe() {
   const { recipeId } = router.query;
 
   //TODO: get real recipe from recipeId
-  const recipe = testPicture;
+  const recipe = testRecipe;
+
+  return (
+    <div>
+      <ImageList />
+    </div>
+  );
 }
