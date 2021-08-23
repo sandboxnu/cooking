@@ -1,5 +1,6 @@
 import { NextApiHandler } from "next";
 import { connection } from "../../server/database";
+import { PicturesApiRequestSchema } from "../../server/validator";
 
 const handler: NextApiHandler = async (req, res) => {
   // posting and getting pictures
@@ -15,9 +16,12 @@ const handler: NextApiHandler = async (req, res) => {
 };
 
 const postHandler: NextApiHandler = async (req, res) => {
-  // TODO: do some validation
   // get data from the body
-  const { pictureUrl, author, description } = req.body;
+  const { value, error } = PicturesApiRequestSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json(error.message);
+  }
+  const { pictureUrl, author, description } = value;
 
   // check if it exsts already
   const query = `SELECT * FROM pictures WHERE picture_url = '${pictureUrl}';`;
@@ -32,9 +36,7 @@ const postHandler: NextApiHandler = async (req, res) => {
   
   // send back 201 if successful
   const result = await connection.query(`SELECT * FROM pictures WHERE PICTURE_URL = '${pictureUrl}';`);
-  // clean the data
-  // send back the data
-  return res.status(201).json(result);
+  return res.status(201).json(result.rows);
 }
 
 const getHandler: NextApiHandler = async (req, res) => {

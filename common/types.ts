@@ -33,3 +33,10 @@ export type IRecipe = {
   pictureIds: Array<Picture>;
   title: string;
 };
+
+export type PictureApiRequest = {
+  author: string;
+  pictureUrl: string;
+  description?: string;
+};
+
