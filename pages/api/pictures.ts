@@ -2,7 +2,7 @@ import { NextApiHandler } from "next";
 import { connection } from "../../server/database";
 import { PicturesApiRequestSchema } from "../../server/validator";
 
-const handler: NextApiHandler = async (req, res) => {
+const picturesApiHandler: NextApiHandler = async (req, res) => {
   // posting and getting pictures
   await connection.connect();
   if (req.method === "POST") {
@@ -44,4 +44,4 @@ const getHandler: NextApiHandler = async (req, res) => {
   res.status(200).json({ pictures: result.rows });
 }
 
-export default handler;
+export default picturesApiHandler;
