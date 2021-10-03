@@ -6,32 +6,32 @@ export type Picture = {
   id: number;
   author: string;
   pictureUrl: string;
-  recipeId?: string;
+  description: string;
+  recipeId?: number;
+};
+
+type BaseRecipe = {
+  id: number;
+  author: string;
+  ingredients: string;
+  steps: string;
+  description: string;
+  title: string;
 };
 
 /**
  * The database representation of a recipe
  * @param photoIds references to photos/creations of this recipe
  */
-export type Recipe = {
-  id: number;
-  author: string;
-  ingredients: string;
-  steps: string;
+export type Recipe = BaseRecipe & {
   pictureIds: Array<string>;
-  title: string;
 };
 
 /**
  * The internap representation of a recipe after being processed from the database
  */
-export type IRecipe = {
-  id: number;
-  author: string;
-  ingredients: string;
-  steps: string;
-  pictureIds: Array<Picture>;
-  title: string;
+export type IRecipe = BaseRecipe & {
+  pictures: Array<Picture>;
 };
 
 export type PictureApiRequest = {
