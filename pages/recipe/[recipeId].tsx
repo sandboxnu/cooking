@@ -3,6 +3,7 @@ import {
   ImageList,
   ImageListItem,
   ImageListItemBar,
+  Typography,
 } from '@material-ui/core';
 import { useRouter } from 'next/dist/client/router';
 import { IRecipe, Picture } from '../../common/types';
@@ -10,30 +11,42 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-// root: {
-//   display: 'flex',
-//   flexWrap: 'wrap',
-//   justifyContent: 'space-around',
-//   overflow: 'hidden',
-//   backgroundColor: theme.palette.background.paper,
-// },
-// imageList: {
-//   flexWrap: 'nowrap',
-//   // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-//   transform: 'translateZ(0)',
-// },
-// title: {
-//   color: theme.palette.primary.light,
-// },
-// titleBar: {
-//   background:
-//     'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-// },
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
-const StyledImageList = styled.ImageList`
-    flexWrap: 'nowrap',
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: 'translateZ(0)',
+const SpotlightImage = styled.img`
+  width: 100%;
+  height: 500px;
+  object-fit: contain;
+`;
+
+const CarouselImage = styled.img`
+  object-fit: contain;
+  max-height: 300px;
+`;
+const CarouselItem = styled.div`
+  margin: 5px;
+  max-height: 300px;
+`;
+
+const Carousel = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+`;
+
+const RecipeText = styled.div`
+  width: 100%;
+  margin-left: 40px;
+`;
+
+const Highlight = styled.img`
+  border-color: #6495ed;
+  border-style: solid;
+  object-fit: contain;
+  max-height: 300px;
 `;
 
 const testPicture: Picture = {
@@ -41,8 +54,26 @@ const testPicture: Picture = {
   author: 'deez nuts',
   description: 'great recipe!',
   pictureUrl:
-    'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.medicalnewstoday.com%2Farticles%2F323042&psig=AOvVaw0O4dRnviMlso4HFqKTe0jB&ust=1629480360372000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJjxoMPNvfICFQAAAAAdAAAAABAD',
+    'https://media.istockphoto.com/photos/top-view-table-full-of-food-picture-id1220017909?b=1&k=20&m=1220017909&s=170667a&w=0&h=Kjdsgm1tUOVBDuP060hGA9kR_OHNr7_4HfnCFrdkmhw=',
   recipeId: 1,
+};
+
+const testPicture2: Picture = {
+  id: 3,
+  author: 'taylor swift',
+  description: 'cookie',
+  pictureUrl:
+    'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/taylor-swift-1602170077.jpg?resize=640:*',
+  recipeId: 1,
+};
+
+const testPicture1: Picture = {
+  id: 2,
+  author: 'deez nuts 2',
+  description: 'great recipe 2!',
+  pictureUrl:
+    'https://blogs.biomedcentral.com/on-medicine/wp-content/uploads/sites/6/2019/09/iStock-1131794876.t5d482e40.m800.xtDADj9SvTVFjzuNeGuNUUGY4tm5d6UGU5tkKM0s3iPk-620x342.jpg',
+  recipeId: 2,
 };
 
 const testRecipe: IRecipe = {
@@ -50,7 +81,7 @@ const testRecipe: IRecipe = {
   author: 'Mr. Deez',
   ingredients: '1. deez \n 2.nuts',
   steps: '1. deez \n 2.nuts',
-  pictures: [testPicture, testPicture, testPicture, testPicture],
+  pictures: [testPicture1, testPicture, testPicture2],
   title: 'fuc',
   description: 'deez nuts',
 };
@@ -74,25 +105,32 @@ export default function Recipe() {
 
   return (
     <div>
-      <div>
-        <img src={spotlightPhoto?.pictureUrl} />
-        <StyledImageList cols={2.5}>
+      <Main>
+        <SpotlightImage src={spotlightPhoto?.pictureUrl} />
+        <Carousel>
           {recipe.pictures.map((picture: Picture) => (
-            <ImageListItem key={picture.pictureUrl}>
-              <img src={picture.pictureUrl} alt={picture.description} />
-              <ImageListItemBar
-                title={picture.description}
-                classes={
-                  {
-                    // root: classes.titleBar,
-                    // title: classes.title,
-                  }
-                }
-              />
-            </ImageListItem>
+            <CarouselItem onClick={() => setSpotlightPhoto(picture)}>
+              {picture.id === spotlightPhoto?.id ? (
+                <Highlight src={picture.pictureUrl} />
+              ) : (
+                <CarouselImage src={picture.pictureUrl} />
+              )}
+            </CarouselItem>
           ))}
-        </StyledImageList>
-      </div>
+        </Carousel>
+        <RecipeText>
+          <Typography variant='h1'>{recipe.title}</Typography>
+          <Typography variant='h6'>By: {recipe.author}</Typography>
+          <Typography variant='h5'>Ingredients:</Typography>
+          {recipe.ingredients.split('\n').map((ingredient) => {
+            return <Typography>{ingredient}</Typography>;
+          })}
+          <Typography variant='h5'>Steps:</Typography>
+          {recipe.steps.split('\n').map((step) => {
+            return <Typography>{step}</Typography>;
+          })}
+        </RecipeText>
+      </Main>
     </div>
   );
 }
